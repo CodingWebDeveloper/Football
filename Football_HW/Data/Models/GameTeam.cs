@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Football_HW.Data.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Football_HW.Data.Models
 {
-    public class GameTeam
+    public class GameTeam : IGameTeam
     {
-
         private Team team;
-        private List<FootballPlayer> players;
+        private IEnumerable<FootballPlayer> players;
 
 
         public GameTeam(Team team, List<FootballPlayer> players)
@@ -33,7 +33,7 @@ namespace Football_HW.Data.Models
             } 
         }
 
-        public List<FootballPlayer> Players 
+        public IEnumerable<FootballPlayer> Players 
         { 
             get { return this.players; }
             private set 

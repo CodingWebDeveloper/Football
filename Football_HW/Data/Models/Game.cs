@@ -112,13 +112,13 @@ namespace Football_HW.Data.Models
 
         public string GameResult()
         {
-            int team1Result = TeamGoals(this.Team1.Players);
-            int team2Result = TeamGoals(this.Team2.Players);
+            int team1Result = TeamGoals(this.Team1.Players.ToList());
+            int team2Result = TeamGoals(this.Team2.Players.ToList());
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Results");
             sb.AppendLine($"Team 1        {team1Result} : {team2Result}        Team 2");
-            sb.AppendLine($"Team 1: \n" + this.TeamPlayersScored(this.Team1.Players));
-            sb.AppendLine($"Team 2: \n" + this.TeamPlayersScored(this.Team2.Players));
+            sb.AppendLine($"Team 1: \n" + this.TeamPlayersScored(this.Team1.Players.ToList()));
+            sb.AppendLine($"Team 2: \n" + this.TeamPlayersScored(this.Team2.Players.ToList()));
 
             return sb.ToString().TrimEnd();
         }
@@ -126,8 +126,8 @@ namespace Football_HW.Data.Models
 
         public string Winner()
         {
-            int team1Result = this.TeamGoals(this.Team1.Players);
-            int team2Result = this.TeamGoals(this.Team2.Players);
+            int team1Result = this.TeamGoals(this.Team1.Players.ToList());
+            int team2Result = this.TeamGoals(this.Team2.Players.ToList());
 
             string winner = team1Result > team2Result ? "Team 1" : "Team 2";
             return "Winner: " + winner;
@@ -138,7 +138,7 @@ namespace Football_HW.Data.Models
             return this.Goals.Count((goal) => players.Any((player) => player.Name == goal.Player.Name));
         }
 
-        private string TeamPlayersScored(List<FootballPlayer> players)
+        private string TeamPlayersScored(IEnumerable<FootballPlayer> players)
         {
             StringBuilder sb = new StringBuilder();
             foreach (Goal goal in this.Goals)
